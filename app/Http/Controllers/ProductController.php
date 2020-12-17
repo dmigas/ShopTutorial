@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filter\ProductFilter;
+use App\Http\Requests\StoreProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     public function __construct(){
-        #$this->middleware('auth')->only(['store', 'update', 'destroy']);
+        $this->middleware('auth')->only(['store', 'update', 'destroy']);
     }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param ProductFilter $filter
+     * @return Response
      */
-    public function index()
+    public function index(ProductFilter $filter)
     {
-        $products = Product::all();
+        $products = Product::filter($filter)->get();
 
         return view('products.index')->with('products', $products);
     }
@@ -25,29 +31,25 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
-        $attributes = \App\Models\ProductAttribute::all();
+        $categories = \App\Models\Category::all();
 
-        return view('products.create', compact('attributes'));
+        return view('products.create', compact('categories'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage. Validation done in
+     * Form Request Validation!
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreProduct $request
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {
-        $request->validate([
-            'name' => 'required|unique:Products|min:3|max:255',
-            'description' => 'required|max:255',
-            'price' => 'required',
-            'amount' => 'required'
-        ]);
+        $path = $request->file('img')->store('public/images');
 
         $product = new Product([
             'name' => $request->name,
@@ -58,9 +60,12 @@ class ProductController extends Controller
 
         $product->save();
 
-        $product->productAttributes()->attach(
-            $request->input('attributes'),
-            ['value' => rand()]
+        $product->productImages()->create([
+            'path' => $path
+        ]);
+
+        $product->categories()->attach(
+            $request->input('categories')
         );
 
         return redirect('/products');
@@ -70,7 +75,7 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Product $product)
     {
@@ -81,7 +86,7 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Product $product)
     {
@@ -93,7 +98,7 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, Product $product)
     {
@@ -118,7 +123,7 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Product $product)
     {

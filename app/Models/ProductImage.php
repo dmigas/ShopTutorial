@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductAttribute extends Model
+class ProductImage extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function products(){
-        return $this->belongsToMany('App\Models\Product')->withPivot('value');;
+    public function product(){
+        return $this->belongsTo(Product::class);
     }
 }

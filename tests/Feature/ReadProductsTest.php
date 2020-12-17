@@ -2,8 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
 use App\Models\Product;
-use App\Models\ProductAttribute;
+use App\Models\ProductImage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -12,20 +13,19 @@ class ReadProductsTest extends TestCase
     use DatabaseMigrations;
 
     private $product;
-    private $productAttributes;
+    private $categories;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->product = Product::factory()->create();
+        $this->categories = Category::factory()->count(5)->create();
 
-        $this->productAttributes = ProductAttribute::factory(5)->create();
+        $this->product = Product::factory()
+            ->has(ProductImage::factory()->count(1))
+            ->create();
 
-        $this->product->productAttributes()->attach(
-            $this->productAttributes,
-            ['value' => rand()]
-        );
+        $this->product->categories()->attach($this->categories);
     }
 
     /**
@@ -44,14 +44,15 @@ class ReadProductsTest extends TestCase
         $response = $this->get('/products/' . $this->product->id);
 
         $response->assertSee($this->product->name);
+        $response->assertSee($this->product->description);
+        $response->assertSee($this->product->price);
     }
 
-    public function testVisitorCanSeeAssociatedProductAttributesWithValues(){
+    public function testVisitorCanSeeProductCategories(){
         $response = $this->get('/products/' . $this->product->id);
 
-        foreach($this->product->productAttributes as $attribute){
-            $response->assertSee($attribute->name);
-            $response->assertSee($attribute->pivot->value);
+        foreach($this->product->categories as $category){
+            $response->assertSee($category->name);
         }
     }
 }

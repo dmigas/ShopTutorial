@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,8 @@ Route::get('products/{product}/edit', [ProductController::class, 'edit']);
 Route::post('products', [ProductController::class, 'store']);
 Route::patch('products/{product}/update', [ProductController::class, 'update']);
 Route::delete('products/{product}/delete', [ProductController::class, 'destroy']);
+
+Route::get('/categories/create', [CategoryController::class, 'create']);
+Route::post('/categories', [CategoryController::class, 'store']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
