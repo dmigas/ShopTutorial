@@ -25,6 +25,8 @@ class ProductController extends Controller
     {
         $products = Product::filter($filter)->get();
 
+        #die ist ein kommentar
+
         return view('products.index')->with('products', $products);
     }
 
