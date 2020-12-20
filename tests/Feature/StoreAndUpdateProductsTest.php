@@ -40,17 +40,20 @@ class StoreAndUpdateProductsTest extends TestCase
         $file = UploadedFile::fake()->image('avatar.jpg');
 
         $response = $this->post('/products', [
-            'name' => 'Test',
-            'description' => 'Some description',
-            'price' => 1,
-            'amount' => 1,
-            'categories' => [1],
-            'img' => $file
+            'name'          => 'Test123',
+            'description'   => 'Some description',
+            'price'         => 1,
+            'amount'        => 1,
+            'categories'    => [1],
+            'img'           => $file
         ]);
 
         Storage::disk('local')->assertExists('public/images/' . $file->hashName());
 
         $response->assertSessionHasNoErrors();
+        $this->assertDatabaseHas('products', [
+            'name'          => 'Test123'
+        ]);
     }
 
     public function testNonAuthenticatedUserCanNotStoreProduct(){

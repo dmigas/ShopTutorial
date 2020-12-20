@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="f95c2bf2-4275-49e2-9c28-fe5115ab7608" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/StoreProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/StoreProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Order.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/ShoppingCart.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/OrderFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_17_093240_create_orders_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/StoreAndUpdateProductsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/StoreAndUpdateProductsTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,11 +184,28 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608482888637</updated>
-      <workItem from="1608482891484" duration="182000" />
+      <workItem from="1608482891484" duration="1657000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="421" y="82" width="598" height="735" key="find.popup" timestamp="1608483886593">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="421" y="82" width="598" height="735" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1608483886593" />
   </component>
 </project>

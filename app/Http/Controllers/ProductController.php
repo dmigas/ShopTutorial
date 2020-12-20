@@ -48,6 +48,8 @@ class ProductController extends Controller
      */
     public function store(StoreProduct $request)
     {
+        #dd($request->all());
+
         $path = $request->file('img')->store('public/images');
 
         $product = new Product([
